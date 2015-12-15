@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Bookmark Manager
 
 ### MVP Features
