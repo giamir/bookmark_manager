@@ -46,6 +46,14 @@ So that I can easily organize and refer to a particular link,
 I'd like to un-tag them.
 
 As a user,
+So that I can prevent mistakes,
+I'd like to be able to edit the title of a link.
+
+As a user,
+So that I can prevent mistakes,
+I'd like to be able to edit the url of a link.
+
+As a user,
 So that I can easily find specific links,
 I'd like to filter links by tag.
 ```
