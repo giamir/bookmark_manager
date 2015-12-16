@@ -1,4 +1,8 @@
 feature 'when a user creates a new account' do
+  before do
+    User.create(name: 'Camilla', email: 'camilla@email.com', password: 'camilla')
+  end
+
   scenario 'a welcome message is shown' do
     visit('/register')
     fill_in('name', with: 'Giamir')
@@ -22,6 +26,7 @@ feature 'when a user creates a new account' do
     fill_in('name', with: 'Giamir')
     fill_in('email', with: 'giamir.buoncristiani@gmail.com')
     fill_in('password', with: 'giamir90')
-    expect(User.last.email).to be eq 'giamir.buoncristiani@gmail.com'
+    click_button('Register')
+    expect(User.last.email).to eq 'giamir.buoncristiani@gmail.com'
   end
 end
