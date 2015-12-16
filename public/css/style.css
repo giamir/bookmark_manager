@@ -1,0 +1,17 @@
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+input[type=submit] {
+    font-size: 2em;
+    color: #021067;
+    padding:15px 45px;
+    font-size: 20px;
+    text-transform: uppercase;
+    background:#E4255C;
+    color: white;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}

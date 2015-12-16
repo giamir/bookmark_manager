@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup'
 class BookmarkManager < Sinatra::Base
   enable :sessions
   set :sessions, true
+  set :public, 'public'
 
   get '/links' do
     @message = session.delete(:message)
