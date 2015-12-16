@@ -5,10 +5,7 @@
 feature 'Tagging links' do
   scenario 'user adds a tag when creating new link' do
     visit '/links/new'
-    fill_in('title', with: 'Makers Academy')
-    fill_in('url', with: 'www.makersacademy.com')
-    fill_in('tag', with: 'dev')
-    click_button 'Save'
+    fill_in_form_and_save
     within 'ul#links' do
       expect(page).to have_content('dev')
     end
