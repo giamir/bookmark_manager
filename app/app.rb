@@ -4,7 +4,6 @@ require_relative 'models/link'
 ENV['RACK_ENV'] ||= 'development'
 
 class BookmarkManager < Sinatra::Base
-
   enable :sessions
 
   get '/links' do
@@ -24,5 +23,5 @@ class BookmarkManager < Sinatra::Base
   end
 
   # start the server if ruby file executed directly
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end
