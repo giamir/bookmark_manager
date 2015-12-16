@@ -12,7 +12,7 @@ class BookmarkManager < Sinatra::Base
     erb :'links/index'
   end
 
-  get '/new' do
+  get '/links/new' do
     erb :'links/new'
   end
 
