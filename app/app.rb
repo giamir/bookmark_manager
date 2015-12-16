@@ -33,6 +33,16 @@ class BookmarkManager < Sinatra::Base
     erb :'links/index'
   end
 
+  get '/register' do
+    erb :register
+  end
+
+  post '/register' do
+    User.create(name: params[:name], email: params[:email], password: params[:password])
+    session[:message] = "Welcome #{User.last.name}!"
+    redirect '/links'
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $PROGRAM_NAME
 end
