@@ -3,12 +3,10 @@ html {
 }
 
 input[type=submit] {
-    font-size: 2em;
-    color: #021067;
-    padding:15px 45px;
-    font-size: 20px;
+    padding:15px 20px;
+    font-size: 15px;
     text-transform: uppercase;
-    background:#E4255C;
+    background:#ccc;
     color: white;
     border:0 none;
     cursor:pointer;
