@@ -1,7 +1,8 @@
-# As a time-pressed user
-# So that I can quickly find links on a particular topic
-# I would like to filter links by tag
 feature 'Filtering by tag' do
+
+  # As a time-pressed user
+  # So that I can quickly find links on a particular topic
+  # I would like to filter links by tag
   before(:each) do
     Link.create(url: 'http://www.makersacademy.com', title: 'Makers Academy', tags: [Tag.first_or_create(name: 'education')])
     Link.create(url: 'http://www.google.com', title: 'Google', tags: [Tag.first_or_create(name: 'search')])
@@ -17,4 +18,5 @@ feature 'Filtering by tag' do
       expect(page).to have_content('This is Zombocom')
     end
   end
+
 end

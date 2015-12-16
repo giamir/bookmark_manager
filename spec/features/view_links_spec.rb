@@ -1,7 +1,6 @@
 # As a User
 # So that I can visit useful websites
 # I want to see a list of links
-
 feature 'viewing links' do
   before(:all) do
     Link.create(title: 'Example Link', url: 'http://example.com')

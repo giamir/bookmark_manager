@@ -11,7 +11,7 @@
   <li>
     Title: <%= link.title %>
     URL: <%= link.url %>
-    tags: <%= link.tags.map(&:name).join(" ") %>
+    tags: <%= link.tags.map(&:name).join(", ") %>
   </li>
   <% end %>
 </ul>

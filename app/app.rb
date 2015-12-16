@@ -1,7 +1,7 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'sinatra/base'
 require_relative 'data_mapper_setup'
-
-ENV['RACK_ENV'] ||= 'development'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
@@ -18,8 +18,10 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     link = Link.new(title: params[:title], url: params[:url])
-    tag = Tag.create(name: params[:tag])
-    link.tags << tag
+    params[:tag].split(/[,+ *]+/).each do |tag_name|
+      tag = Tag.first_or_create(name: tag_name)
+      link.tags << tag
+    end
     link.save
     session[:message] = 'Link successfully added'
     redirect '/links'

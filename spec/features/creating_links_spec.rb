@@ -1,8 +1,7 @@
-# As a User
-# So that I can come back to websites I like
-# I want to add new links to the list with their title
-
-feature 'add links' do
+feature 'creating links' do
+  # As a User
+  # So that I can come back to websites I like
+  # I want to add new links to the list with their title
   scenario 'user adds a link' do
     visit '/links'
     click_button 'Add link'
