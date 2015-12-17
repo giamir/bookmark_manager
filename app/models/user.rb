@@ -3,9 +3,9 @@ require 'dm-validations'
 class User
   include DataMapper::Resource
 
-  property :id, Serial
-  property :name, String
-  property :email, String
+  property :id,       Serial
+  property :name,     String
+  property :email,    String
   property :password, BCryptHash, length: 255
   attr_accessor :password_confirmation
 

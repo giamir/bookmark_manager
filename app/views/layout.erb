@@ -6,10 +6,7 @@
     <link href="/css/style.css" rel="stylesheet">
   </head>
   <body>
-    <% if current_user %>
-      <h1>Welcome <%= current_user.name %>!</h1>
-    <% end %>
+      <h1>Welcome <%= current_user.name if current_user %>!</h1>
     <%= yield %>
-
   </body>
 </html>
