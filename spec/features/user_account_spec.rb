@@ -25,4 +25,25 @@ feature 'when a user creates a new account' do
     fill_in('password_confirmation', with: 'giamir')
     expect { click_button('Register') }.not_to change { User.count }
   end
+
+  scenario 'if the password does not match stay in register page' do
+    fill_in_register_form
+    fill_in('password_confirmation', with: 'giamir')
+    click_button('Register')
+    expect(current_path).to eq '/users'
+  end
+
+  scenario 'if the password does not match should display a message' do
+    fill_in_register_form
+    fill_in('password_confirmation', with: 'giamir')
+    click_button('Register')
+    expect(page).to have_content 'Password and confirmation password do not match'
+  end
+
+  scenario 'if the password does not match should keep email address' do
+    fill_in_register_form
+    fill_in('password_confirmation', with: 'giamir')
+    click_button('Register')
+    expect(find('input[name="email"]')['value']).to eq 'giamir.buoncristiani@gmail.com'
+  end
 end

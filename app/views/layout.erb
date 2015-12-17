@@ -6,7 +6,13 @@
     <link href="/css/style.css" rel="stylesheet">
   </head>
   <body>
-      <h1>Welcome <%= current_user.name if current_user %>!</h1>
+    <% if current_user %>
+      <h1>Welcome <%= current_user.name %>!</h1>
+    <% end %>
+    <% if flash[:notice] %>
+      <div id="notice"><%= flash[:notice] %></div>
+    <% end %>
     <%= yield %>
+
   </body>
 </html>
