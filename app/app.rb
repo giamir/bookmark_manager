@@ -40,7 +40,7 @@ class BookmarkManager < Sinatra::Base
     erb :register
   end
 
-  post '/register' do
+  post '/users' do
     user = User.create(name: params[:name],
                        email: params[:email],
                        password: params[:password],
