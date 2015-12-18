@@ -46,4 +46,22 @@ feature 'when a user creates a new account' do
     click_button('Register')
     expect(find('input[name="email"]')['value']).to eq 'giamir.buoncristiani@gmail.com'
   end
+
+  scenario 'if the submitted email is blank do not record the user' do
+    visit('/register')
+    fill_in('name', with: 'Giamir')
+    fill_in('email', with: '')
+    fill_in('password', with: 'giamir90')
+    fill_in('password_confirmation', with: 'giamir90')
+    expect { click_button('Register') }.not_to change { User.count }
+  end
+
+  scenario 'if the submitted email is invalid do not record the user' do
+    visit('/register')
+    fill_in('name', with: 'Giamir')
+    fill_in('email', with: 'sdfgds@@ffas')
+    fill_in('password', with: 'giamir90')
+    fill_in('password_confirmation', with: 'giamir90')
+    expect { click_button('Register') }.not_to change { User.count }
+  end
 end
