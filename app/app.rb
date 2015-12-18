@@ -21,6 +21,22 @@ class BookmarkManager < Sinatra::Base
     erb :'links/new'
   end
 
+  get '/tags/:name' do
+    tag = Tag.first(name: params[:name])
+    @links = tag ? tag.links : []
+    erb :'links/index'
+  end
+
+  get '/users/new' do
+    @user = User.new
+    erb :'users/new'
+  end
+
+  get '/sessions/new' do
+    @user = User.new
+    erb :'sessions/new'
+  end
+
   post '/links' do
     link = Link.new(title: params[:title], url: params[:url])
     params[:tag].split(/[,+ *]+/).each do |tag_name|
@@ -32,28 +48,28 @@ class BookmarkManager < Sinatra::Base
     redirect '/links'
   end
 
-  get '/tags/:name' do
-    tag = Tag.first(name: params[:name])
-    @links = tag ? tag.links : []
-    erb :'links/index'
-  end
-
-  get '/register' do
-    @user = User.new
-    erb :register
-  end
-
   post '/users' do
     @user = User.new(name: params[:name],
-                    email: params[:email],
-                    password: params[:password],
-                    password_confirmation: params[:password_confirmation])
+                     email: params[:email],
+                     password: params[:password],
+                     password_confirmation: params[:password_confirmation])
     if @user.save
       session[:user_id] = @user.id
       redirect to('/links')
     else
       flash.now[:errors] = @user.errors.full_messages
-      erb :register
+      erb :'users/new'
+    end
+  end
+
+  post '/sessions' do
+    user_id = User.authenticate(params[:email], params[:password])
+    if user_id
+      session[:user_id] = user_id
+      redirect to('/links')
+    else
+      flash.now[:errors] = 'Email or password is not correct'
+      erb :'sessions/new'
     end
   end
 

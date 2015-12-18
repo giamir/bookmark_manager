@@ -45,3 +45,19 @@ feature 'when a user creates a new account' do
     expect(page).to have_content 'Email is already taken'
   end
 end
+
+feature 'when a user sign in' do
+  before do
+    User.create(name: 'Giamir',
+                email: 'giamir@email.com',
+                password: 'giamir',
+                password_confirmation: 'giamir')
+  end
+  scenario 'a welcome message is displayed to him' do
+    visit('/sessions/new')
+    fill_in('email', with: 'giamir@email.com')
+    fill_in('password', with: 'giamir')
+    click_button('Log in')
+    expect(page).to have_content('Welcome Giamir!')
+  end
+end

@@ -9,7 +9,7 @@ def fill_in_register_form(name: 'Giamir',
                           email: 'giamir@email.com',
                           password: 'giamir',
                           password_confirmation: 'giamir')
-  visit('/register')
+  visit('/users/new')
   fill_in('name', with: name)
   fill_in('email', with: email)
   fill_in('password', with: password)
