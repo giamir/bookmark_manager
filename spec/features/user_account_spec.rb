@@ -1,67 +1,47 @@
 feature 'when a user creates a new account' do
   scenario 'a welcome message is shown' do
     fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir90')
-    click_button('Register')
     expect(current_path).to eq '/links'
     expect(page).to have_content 'Welcome Giamir!'
   end
 
   scenario 'user count increases by 1' do
-    fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir90')
-    expect { click_button('Register') }.to change { User.count }.by(1)
+    expect { fill_in_register_form }.to change { User.count }.by(1)
   end
 
   scenario 'user email address entered matches the one saved in database' do
     fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir90')
-    click_button('Register')
-    expect(User.last.email).to eq 'giamir.buoncristiani@gmail.com'
+    expect(User.last.email).to eq 'giamir@email.com'
   end
 
   scenario 'if the there is a mismatching password confirmation no new users are created' do
-    fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir')
-    expect { click_button('Register') }.not_to change { User.count }
+    expect { fill_in_register_form(password_confirmation: 'nomatch') }.not_to change { User.count }
   end
 
-  scenario 'if the password does not match stay in register page' do
-    fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir')
-    click_button('Register')
+  scenario 'if the password does not match stay in register page and display a messsage' do
+    fill_in_register_form(password_confirmation: 'nomatch')
     expect(current_path).to eq '/users'
-  end
-
-  scenario 'if the password does not match should display a message' do
-    fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir')
-    click_button('Register')
-    expect(page).to have_content 'Password and confirmation password do not match'
+    expect(page).to have_content 'Password does not match the confirmation'
   end
 
   scenario 'if the password does not match should keep email address' do
+    fill_in_register_form(password_confirmation: 'nomatch')
+    expect(find('input[name="email"]')['value']).to eq 'giamir@email.com'
+  end
+
+  scenario 'if the submitted email is blank display a message' do
+    fill_in_register_form(email: '')
+    expect(page).to have_content('Email must not be blank')
+  end
+
+  scenario 'if the submitted email is invalid display a message' do
+    fill_in_register_form(email: 'no_valid_email')
+    expect(page).to have_content 'Email has an invalid format'
+  end
+
+  scenario 'if the submitted email is already in the database display a message' do
     fill_in_register_form
-    fill_in('password_confirmation', with: 'giamir')
-    click_button('Register')
-    expect(find('input[name="email"]')['value']).to eq 'giamir.buoncristiani@gmail.com'
-  end
-
-  scenario 'if the submitted email is blank do not record the user' do
-    visit('/register')
-    fill_in('name', with: 'Giamir')
-    fill_in('email', with: '')
-    fill_in('password', with: 'giamir90')
-    fill_in('password_confirmation', with: 'giamir90')
-    expect { click_button('Register') }.not_to change { User.count }
-  end
-
-  scenario 'if the submitted email is invalid do not record the user' do
-    visit('/register')
-    fill_in('name', with: 'Giamir')
-    fill_in('email', with: 'sdfgds@@ffas')
-    fill_in('password', with: 'giamir90')
-    fill_in('password_confirmation', with: 'giamir90')
-    expect { click_button('Register') }.not_to change { User.count }
+    fill_in_register_form
+    expect(page).to have_content 'Email is already taken'
   end
 end
