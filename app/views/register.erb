@@ -1,7 +1,7 @@
 <h1>Create an account</h1>
 <form action="/users" method="post">
   <input type="text" name="name" placeholder="Name" required>
-  <input type="email" name="email" value="<%= flash[:email] if flash[:email] %>" placeholder="Email" required>
+  <input type="email" name="email" value="<%= @user.email %>" placeholder="Email" required>
   <input type="password" name="password" placeholder="Password">
   <input type="password" name="password_confirmation" placeholder="Password Confirmation">
   <input type="submit" value="Register">
