@@ -4,6 +4,8 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require 'tilt/erb'
+require 'dotenv'
+Dotenv.load
 
 require_relative 'data_mapper_setup'
 
@@ -12,3 +14,4 @@ require_relative 'controllers/links'
 require_relative 'controllers/tags'
 require_relative 'controllers/sessions'
 require_relative 'controllers/users'
+require_relative '../lib/send_recovery_link'
