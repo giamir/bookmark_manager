@@ -26,4 +26,10 @@ module SessionHelpers
     sign_in
     click_button('Log out')
   end
+
+  def recover_password
+    visit '/users/recover'
+    fill_in :email, with: 'giamir@email.com'
+    click_button 'Submit'
+  end
 end

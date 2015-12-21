@@ -1,4 +1,4 @@
-feature 'when a user creates a new account' do
+feature 'Creating a new account' do
   scenario 'a welcome message is shown' do
     sign_up
     expect(current_path).to eq '/links'
@@ -43,24 +43,5 @@ feature 'when a user creates a new account' do
     sign_up
     sign_up
     expect(page).to have_content 'Email is already taken'
-  end
-end
-
-feature 'when a user sign in' do
-  scenario 'a welcome message is displayed to him' do
-    sign_in
-    expect(page).to have_content('Welcome Giamir!')
-  end
-  scenario 'a log out button is displayed' do
-    sign_in
-    expect(page).to have_content('Welcome Giamir!')
-  end
-end
-
-feature 'when a user sign out' do
-  scenario 'is redirected to the links page and a goodbye message is displayed' do
-    sign_out
-    expect(current_path).to eq '/links'
-    expect(page).to have_content 'Goodbye Giamir!'
   end
 end

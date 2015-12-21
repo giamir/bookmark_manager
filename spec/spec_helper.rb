@@ -10,6 +10,7 @@ require 'database_cleaner'
 require 'helpers/tag'
 require 'helpers/session'
 require 'byebug'
+require 'timecop'
 
 Capybara.app = BookmarkManager
 
