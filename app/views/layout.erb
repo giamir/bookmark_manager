@@ -6,25 +6,8 @@
     <link href="/css/style.css" rel="stylesheet">
   </head>
   <body>
-    <% if current_user %>
-      <h1>Welcome <%= current_user.name %>!</h1>
-      <form action="/sessions" method="post">
-          <input name="_method" type="hidden" value="delete" />
-          <input type="submit" value="Log out" />
-      </form>
-    <% end %>
-    <% if flash[:errors] && !flash[:errors].empty? %>
-      Errors:
-      <ul id='errors'>
-        <% flash[:errors].each do |error| %>
-        <li><%= error %></li>
-        <% end %>
-      </ul>
-    <% end %>
-    <% if flash[:notice] %>
-      <p><%= flash[:notice] %></p>
-    <% end %>
+    <%= partial :welcome %>
+    <%= partial :flash %>
     <%= yield %>
-
   </body>
 </html>
